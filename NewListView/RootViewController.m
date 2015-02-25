@@ -1,0 +1,56 @@
+//
+//  RootViewController.m
+//  NewListView
+//
+//  Created by ian on 15/2/25.
+//  Copyright (c) 2015年 ian. All rights reserved.
+//
+
+#import "RootViewController.h"
+#import "NewListView.h"
+#import "TestPageDataSource.h"
+@interface RootViewController ()
+{
+    NewListView *_listView;
+}
+@end
+
+@implementation RootViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"NewListView";
+    
+    _listView = [[NewListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    
+    TestPageDataSource *ds = [[TestPageDataSource alloc] init];
+    ds.pageSize = 2;
+    ds.requestBlock = ^(NSDictionary *params, void(^dataArrayDone)(BOOL, id)){
+        
+        // 网络请求成功
+        NSMutableArray *tempArray = [[NSMutableArray alloc] initWithObjects:@"测试1", @"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",@"测试2", @"测试3", @"测试2", @"测试3",nil];
+        dataArrayDone(1,tempArray);
+        
+    };
+    _listView.dataSource = ds;
+    [self.view addSubview:_listView];
+    
+    [_listView startLoading];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
