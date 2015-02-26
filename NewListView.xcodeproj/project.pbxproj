@@ -15,7 +15,6 @@
 		3CE86BCB1A9D676A00859E71 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE86BCA1A9D676A00859E71 /* RootViewController.m */; };
 		3CE86BCF1A9D6A2900859E71 /* NewListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE86BCE1A9D6A2900859E71 /* NewListView.m */; };
 		3CE86BD31A9D7BB200859E71 /* NewPagedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE86BD21A9D7BB200859E71 /* NewPagedDataSource.m */; };
-		3CE86BD61A9D96F700859E71 /* TestPageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE86BD51A9D96F700859E71 /* TestPageDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +45,6 @@
 		3CE86BD01A9D779700859E71 /* NewListViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewListViewDataSource.h; sourceTree = "<group>"; };
 		3CE86BD11A9D7BB200859E71 /* NewPagedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedDataSource.h; sourceTree = "<group>"; };
 		3CE86BD21A9D7BB200859E71 /* NewPagedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedDataSource.m; sourceTree = "<group>"; };
-		3CE86BD41A9D96F700859E71 /* TestPageDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPageDataSource.h; sourceTree = "<group>"; };
-		3CE86BD51A9D96F700859E71 /* TestPageDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPageDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +90,6 @@
 				3CE86BA81A9D620800859E71 /* AppDelegate.m */,
 				3CE86BC91A9D676A00859E71 /* RootViewController.h */,
 				3CE86BCA1A9D676A00859E71 /* RootViewController.m */,
-				3CE86BD41A9D96F700859E71 /* TestPageDataSource.h */,
-				3CE86BD51A9D96F700859E71 /* TestPageDataSource.m */,
 				3CE86BCC1A9D6A0600859E71 /* ListView */,
 				3CE86BB01A9D620800859E71 /* Images.xcassets */,
 				3CE86BB21A9D620800859E71 /* LaunchScreen.xib */,
@@ -241,7 +236,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE86BA91A9D620800859E71 /* AppDelegate.m in Sources */,
-				3CE86BD61A9D96F700859E71 /* TestPageDataSource.m in Sources */,
 				3CE86BCF1A9D6A2900859E71 /* NewListView.m in Sources */,
 				3CE86BA61A9D620800859E71 /* main.m in Sources */,
 				3CE86BCB1A9D676A00859E71 /* RootViewController.m in Sources */,
@@ -428,6 +422,7 @@
 				3CE86BC51A9D620800859E71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3CE86BC61A9D620800859E71 /* Build configuration list for PBXNativeTarget "NewListViewTests" */ = {
 			isa = XCConfigurationList;
@@ -436,6 +431,7 @@
 				3CE86BC81A9D620800859E71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

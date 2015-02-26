@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NewListViewDataSource.h"
+#import "NewPagedDataSource.h"
 
 @interface NewListView : UIView<UITableViewDataSource, UITableViewDelegate>
 {

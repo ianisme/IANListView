@@ -8,7 +8,6 @@
 
 #import "RootViewController.h"
 #import "NewListView.h"
-#import "TestPageDataSource.h"
 @interface RootViewController ()
 {
     NewListView *_listView;
@@ -23,7 +22,7 @@
     
     _listView = [[NewListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     
-    TestPageDataSource *ds = [[TestPageDataSource alloc] init];
+    NewPagedDataSource *ds = [[NewPagedDataSource alloc] init];
     ds.pageSize = 2;
     ds.requestBlock = ^(NSDictionary *params, void(^dataArrayDone)(BOOL, id)){
         
