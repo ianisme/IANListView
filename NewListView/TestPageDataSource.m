@@ -21,11 +21,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRow:(NSInteger)row
-{
-    NSLog(@"点击了第%ld行",(long)row);
-}
-
 - (CGFloat)heightOfRow:(NSInteger)row
 {
     if (row < [self.dataArray count]) {

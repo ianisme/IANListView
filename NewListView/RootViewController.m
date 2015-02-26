@@ -32,7 +32,14 @@
         dataArrayDone(1,tempArray);
         
     };
+    
+    ds.selectBlock = ^(NSInteger row, NSMutableArray *dataArray){
+        
+        NSLog(@"测试一下%ld", (long)row);
+        
+    };
     _listView.dataSource = ds;
+    
     [self.view addSubview:_listView];
     
     [_listView startLoading];

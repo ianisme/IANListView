@@ -63,6 +63,12 @@
     _hasMore = NO;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRow:(NSInteger)row
+{
+    if (self.selectBlock) {
+        self.selectBlock(row, self.dataArray);
+    }
+}
 
 - (NSMutableDictionary *)_pageArgs
 {

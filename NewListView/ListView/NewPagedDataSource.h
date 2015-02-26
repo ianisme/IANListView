@@ -10,6 +10,7 @@
 #import "NewListViewDataSource.h"
 
 typedef void(^TRequestBlock)(NSDictionary *, void(^)(BOOL successful, id result));
+typedef void (^TableViewSelectBlock)(NSInteger, id);
 
 @interface NewPagedDataSource : NSObject<NewListViewDataSource>
 {
@@ -21,5 +22,6 @@ typedef void(^TRequestBlock)(NSDictionary *, void(^)(BOOL successful, id result)
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, assign) NSInteger pageSize;
 @property (nonatomic, copy) TRequestBlock requestBlock;
+@property (nonatomic, copy) TableViewSelectBlock selectBlock;
 
 @end

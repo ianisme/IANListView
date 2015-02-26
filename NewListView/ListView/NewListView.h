@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NewListViewDataSource.h"
+
 @interface NewListView : UIView<UITableViewDataSource, UITableViewDelegate>
 {
 @private
