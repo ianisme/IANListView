@@ -10,23 +10,4 @@
 
 @implementation TestPageDataSource
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRow:(NSInteger)row
-{
-    NSString *cellIdentifier = @"cellIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    cell.textLabel.text = self.dataArray[row];
-    return cell;
-}
-
-- (CGFloat)heightOfRow:(NSInteger)row
-{
-    if (row < [self.dataArray count]) {
-        return 110;
-    }
-    return 44.0;
-}
-
 @end

@@ -12,16 +12,14 @@
 
 @property (nonatomic, readonly) NSMutableArray *dataArray;
 
-@optional
-- (CGFloat)heightOfRow:(NSInteger)row;
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRow:(NSInteger)row;
-- (void)tableView:(UITableView *)tableView didSelectRow:(NSInteger)row;
-
 @required
 - (NSInteger)numberOfRows;
 - (void)refresh:(BOOL)force handler:(void (^)(BOOL success, id result))refreshDone;
 - (void)loadMore:(void (^)(BOOL success, id result))loadMoreDone;
 - (BOOL)hasMore;
 - (void)clearData;
+- (void)tableView:(UITableView *)tableView didSelectRow:(NSInteger)row;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRow:(NSInteger)row;
+- (CGFloat)heightOfRow:(NSInteger)row;
 
 @end

@@ -11,6 +11,8 @@
 
 typedef void(^TRequestBlock)(NSDictionary *, void(^)(BOOL successful, id result));
 typedef void (^TableViewSelectBlock)(NSInteger, id);
+typedef UITableViewCell * (^CreatTableViewCellBlock)(UITableView *, NSInteger, id);
+typedef CGFloat (^CalculateHeightOfRow)(NSInteger, id);
 
 @interface NewPagedDataSource : NSObject<NewListViewDataSource>
 {
@@ -23,5 +25,7 @@ typedef void (^TableViewSelectBlock)(NSInteger, id);
 @property (nonatomic, assign) NSInteger pageSize;
 @property (nonatomic, copy) TRequestBlock requestBlock;
 @property (nonatomic, copy) TableViewSelectBlock selectBlock;
+@property (nonatomic, copy) CreatTableViewCellBlock creatCellBlock;
+@property (nonatomic, copy) CalculateHeightOfRow calculateHeightofRowBlock;
 
 @end

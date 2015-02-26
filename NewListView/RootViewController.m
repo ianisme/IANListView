@@ -32,7 +32,24 @@
         dataArrayDone(1,tempArray);
         
     };
+    ds.creatCellBlock = ^(UITableView *tableView, NSInteger row, NSMutableArray *dataArray){
+        NSString *cellIdentifier = @"cellIdentifier";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        cell.textLabel.text = dataArray[row];
+        return cell;
+    };
     
+    ds.calculateHeightofRowBlock = ^(NSInteger row, NSMutableArray *dataArray){
+
+        if (row < [dataArray count]) {
+            return (CGFloat)150;
+        }
+        return (CGFloat)44.0;
+    };
+
     ds.selectBlock = ^(NSInteger row, NSMutableArray *dataArray){
         
         NSLog(@"测试一下%ld", (long)row);

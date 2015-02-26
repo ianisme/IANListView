@@ -70,6 +70,24 @@
     }
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRow:(NSInteger)row
+{
+    if (self.creatCellBlock) {
+        return self.creatCellBlock(tableView, row, self.dataArray);
+    }else{
+        return [[UITableViewCell alloc]init];
+    }
+}
+
+- (CGFloat)heightOfRow:(NSInteger)row
+{
+    if (self.calculateHeightofRowBlock) {
+        return self.calculateHeightofRowBlock(row, self.dataArray);
+    }else{
+        return 44;
+    }
+}
+
 - (NSMutableDictionary *)_pageArgs
 {
     NSMutableDictionary *args = [[NSMutableDictionary alloc] init];
