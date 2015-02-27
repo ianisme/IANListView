@@ -32,7 +32,7 @@
     }
     
     [_dataSource refresh:force handler:^(BOOL success, id result){
-
+        [_tableView reloadData];
     }];
 }
 
