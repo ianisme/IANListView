@@ -100,6 +100,7 @@
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
         tableView.delegate = self;
         tableView.dataSource = self;
+        [self _setExtraCellLineHidden:tableView];
         [self addSubview:tableView];
         tableView;
     });
@@ -108,5 +109,14 @@
         ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
         [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
     }
+}
+
+// 没有数据的时候将分割线隐藏
+- (void)_setExtraCellLineHidden: (UITableView *)tableView
+{
+    UIView *view =[[UIView alloc] init];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+    [tableView setTableHeaderView:view];
 }
 @end

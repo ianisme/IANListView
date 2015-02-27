@@ -64,7 +64,7 @@
     ds.calculateHeightofRowBlock = ^(NSInteger row, NSMutableArray *dataArray){
 
         if (row < [dataArray count]) {
-            CGSize size = [UUtil textSize:((NSDictionary *)dataArray[row])[@"content"] font:[UIFont systemFontOfSize:14.0f] bounding:CGSizeMake(self.view.bounds.size.width, INT32_MAX)];
+            CGSize size = [UUtil textSize:((NSDictionary *)dataArray[row])[@"content"] font:[UIFont systemFontOfSize:14.0f] bounding:CGSizeMake(self.view.bounds.size.width-30, INT32_MAX)];
             return size.height+10;
         }
         return (CGFloat)44.0;
