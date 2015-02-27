@@ -7,7 +7,7 @@
 //
 
 #import "NewListView.h"
-
+#import "ODRefreshControl.h"
 @implementation NewListView
 
 - (void)startLoading
@@ -26,14 +26,13 @@
 
 - (void)refreshList:(BOOL)force
 {
+    _isLoading = YES;
     if (!force) {
         
     }
     
     [_dataSource refresh:force handler:^(BOOL success, id result){
 
-    
-    
     }];
 }
 
@@ -61,14 +60,6 @@
     }
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (<#condition#>) {
-//        <#statements#>
-//    }
-//}
-//-----------------------------
-
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -80,6 +71,24 @@
     return [_dataSource tableView:tableView cellForRow:[indexPath row]];
 }
 //-----------------------------
+
+#pragma mark - UIScrollView Delegate -
+
+
+//---------------------------------
+#pragma mark ODRefreshControl Methods
+
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+{
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self refreshList:YES];
+        [refreshControl endRefreshing];
+    });
+}
+// ----------------------------------
+
 
 - (void)_initTabelView
 {
@@ -94,5 +103,10 @@
         [self addSubview:tableView];
         tableView;
     });
+    
+    if (!_withoutRefreshHeader) {
+        ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
+        [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+    }
 }
 @end

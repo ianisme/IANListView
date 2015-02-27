@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "NewPagedDataSource.h"
-
 @interface NewListView : UIView<UITableViewDataSource, UITableViewDelegate>
 {
 @private
     BOOL _isEmpty;
     BOOL _isFailing;
+    BOOL _isLoading;
 }
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, strong) id<NewListViewDataSource> dataSource;
 @property (nonatomic, copy) NSString *empryText;
+@property (nonatomic) BOOL withoutRefreshHeader;
 
 - (void)startLoading;
 - (void)refreshList:(BOOL)force;

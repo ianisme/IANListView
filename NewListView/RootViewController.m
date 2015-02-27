@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"NewListView";
-    
-    _listView = [[NewListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.edgesForExtendedLayout=UIRectEdgeNone;
+    _listView = [[NewListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
     
     NewPagedDataSource *ds = [[NewPagedDataSource alloc] init];
     ds.pageSize = 2;
