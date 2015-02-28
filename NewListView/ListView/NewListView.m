@@ -25,7 +25,9 @@
 }
 - (void)viewDidAppearReloadData
 {
-    [self.tableView headerBeginRefreshing];
+    if(!_withoutRefreshHeader){
+        [self.tableView headerBeginRefreshing];
+    }
 }
 
 - (void)refreshList:(BOOL)force
@@ -33,10 +35,13 @@
     if (!force) {
         
     }
-    
+
     [_dataSource refresh:force handler:^(BOOL success, id result){
-        [self.tableView headerEndRefreshing];
+        if (!_withoutRefreshHeader) {
+            [self.tableView headerEndRefreshing];
+        }
         [self reloadData];
+        
     }];
 }
 
@@ -72,16 +77,24 @@
             UILabel *label = (UILabel *)[cell viewWithTag:100];
             label.hidden = YES;
             [indicatorView startAnimating];
-            
+
             [_dataSource loadMore:^(BOOL success, id result){
-                [indicatorView stopAnimating];
+
                 if (success) {
                     label.hidden = YES;
-                    [self reloadData];
+                    int64_t delayInSeconds = 1.0;
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                    
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        [indicatorView stopAnimating];
+                        [self reloadData];
+                    });
                 }else{
+                    [indicatorView stopAnimating];
                     label.hidden = NO;
                     label.text = @"加载失败";
                 }
+                
             
             }];
         }else{
