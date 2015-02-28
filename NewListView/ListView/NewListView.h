@@ -13,12 +13,12 @@
 @private
     BOOL _isEmpty;
     BOOL _isFailing;
-    BOOL _isLoading;
 }
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, strong) id<NewListViewDataSource> dataSource;
 @property (nonatomic, copy) NSString *empryText;
-@property (nonatomic) BOOL withoutRefreshHeader;
+@property (nonatomic) BOOL withoutRefreshHeader; //是否开启下拉刷新
+@property (nonatomic) BOOL withoutLoadMore; // 是否开启上拉加载更多
 
 - (void)startLoading;
 - (void)refreshList:(BOOL)force;

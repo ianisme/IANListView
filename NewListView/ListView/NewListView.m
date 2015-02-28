@@ -26,13 +26,12 @@
 
 - (void)refreshList:(BOOL)force
 {
-    _isLoading = YES;
     if (!force) {
         
     }
     
     [_dataSource refresh:force handler:^(BOOL success, id result){
-        [_tableView reloadData];
+        [self reloadData];
     }];
 }
 
@@ -60,22 +59,60 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath row] == [_dataSource numberOfRows]) {
+        if ([_dataSource hasMore]) {
+            UIActivityIndicatorView *indicatorView = (UIActivityIndicatorView *)[cell viewWithTag:99]; //小菊花
+            UILabel *label = (UILabel *)[cell viewWithTag:100];
+            label.hidden = YES;
+            [indicatorView startAnimating];
+            
+            [_dataSource loadMore:^(BOOL success, id result){
+                [indicatorView stopAnimating];
+                if (success) {
+                    label.hidden = YES;
+                    [self reloadData];
+                }else{
+                    label.hidden = NO;
+                    label.text = @"加载失败";
+                }
+            
+            }];
+        }else{
+            UILabel *label = (UILabel *)[cell viewWithTag:100];
+            if (_tableView.contentSize.height > cell.frame.size.height + tableView.frame.size.height) {
+                label.hidden = NO;
+            }else{
+                label.hidden = YES;
+            }
+        }
+    }
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_dataSource numberOfRows];
+    if(_isFailing || _isEmpty){
+        return 1;
+    }
+    NSInteger rawNum = [_dataSource numberOfRows];
+    if (rawNum > 0) {
+        return _withoutLoadMore ? rawNum : rawNum + 1;
+    }else{
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([indexPath row] == [_dataSource numberOfRows]){
+        return [self _loadingMoreCellFor:tableView cellHeight:44 cellIdentifier:@"ListloadingCell"];
+    }
     return [_dataSource tableView:tableView cellForRow:[indexPath row]];
 }
 //-----------------------------
 
-#pragma mark - UIScrollView Delegate -
-
-
-//---------------------------------
 #pragma mark ODRefreshControl Methods
 
 - (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
@@ -89,6 +126,36 @@
 }
 // ----------------------------------
 
+#pragma -mark transition view
+- (UITableViewCell *)_loadingMoreCellFor:(UITableView *)tableView cellHeight:(CGFloat)height cellIdentifier:(NSString *)identifier
+{
+    UITableViewCell *loadingCell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!loadingCell) {
+        loadingCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        loadingCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        loadingCell.separatorInset = UIEdgeInsetsMake(0, tableView.frame.size.width, 0, 0);
+        CGFloat indicatorSize = 20;
+        UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        indicatorView.frame = CGRectMake((tableView.frame.size.width - indicatorSize) / 2, (height - indicatorSize) / 2, indicatorSize, indicatorSize);
+        indicatorView.tag = 99;
+        indicatorView.hidesWhenStopped = YES;
+        [loadingCell addSubview:indicatorView];
+        
+        height = 44;
+        CGSize labelSize = CGSizeMake(200, 20);
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width / 2 - labelSize.width / 2,
+                                                                   (height - labelSize.height) / 2, labelSize.width, labelSize.height)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:13.0f];
+        label.textColor = [UIColor grayColor];
+        label.text = @"没有更多了";
+        label.tag = 100;
+        label.hidden = YES;
+        [loadingCell addSubview:label];
+    }
+    return loadingCell;
+}
+// ----------------------------------
 
 - (void)_initTabelView
 {
@@ -108,6 +175,12 @@
     if (!_withoutRefreshHeader) {
         ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
         [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+    }
+    // 没有更多了
+    if (_withoutLoadMore) {
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _tableView.frame.size.width, 10)];
+    }else{
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }
 }
 

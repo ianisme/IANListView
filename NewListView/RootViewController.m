@@ -43,7 +43,7 @@
             
             dataArrayDone(1,tempArray);
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"发生错误！%@",error);
+            dataArrayDone(0,error);
         }];
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [queue addOperation:operation];

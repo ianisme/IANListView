@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EBB748C3-E80C-4DD5-8468-1402FE350162</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NewListView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>47E74541D9F456A20934D70A5B1C4281EAF4DE27</key>
+		<string>https://coding.net/ianisme/NewListView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>NewListView.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>47E74541D9F456A20934D70A5B1C4281EAF4DE27</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://coding.net/ianisme/NewListView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>47E74541D9F456A20934D70A5B1C4281EAF4DE27</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>47E74541D9F456A20934D70A5B1C4281EAF4DE27</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NewListView</string>
+		</dict>
+	</array>
+</dict>
+</plist>
