@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "NewPagedDataSource.h"
-@interface NewListView : UIView<UITableViewDataSource, UITableViewDelegate>
+#import "EGORefreshTableViewManager.h"
+@interface NewListView : UIView<UITableViewDataSource, UITableViewDelegate, EGORefreshTableViewManagerDelegate>
 {
 @private
     BOOL _isEmpty;
     BOOL _isFailing;
+    EGORefreshTableViewManager *_refreshManager;
 }
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, strong) id<NewListViewDataSource> dataSource;
@@ -23,5 +25,6 @@
 - (void)startLoading;
 - (void)refreshList:(BOOL)force;
 - (void)reloadData;
+- (void)viewDidAppearReloadData; //替代MHD刷新
 
 @end

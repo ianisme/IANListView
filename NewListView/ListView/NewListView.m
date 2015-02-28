@@ -7,7 +7,7 @@
 //
 
 #import "NewListView.h"
-#import "ODRefreshControl.h"
+
 @implementation NewListView
 
 - (void)startLoading
@@ -22,6 +22,10 @@
         _isEmpty = _dataSource.dataArray == nil || _dataSource.dataArray.count == 0;
         [_tableView reloadData];
     }
+}
+- (void)viewDidAppearReloadData
+{
+    [_refreshManager pullRefresh];
 }
 
 - (void)refreshList:(BOOL)force
@@ -112,17 +116,29 @@
     return [_dataSource tableView:tableView cellForRow:[indexPath row]];
 }
 //-----------------------------
+#pragma -mark refreshHeader
 
-#pragma mark ODRefreshControl Methods
-
-- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self refreshList:YES];
-        [refreshControl endRefreshing];
-    });
+    if (_refreshManager)
+    {
+        [_refreshManager egoRefreshManagerScrollViewDidScroll:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (_refreshManager)
+    {
+        [_refreshManager egoRefreshManagerScrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }
+}
+
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)refreshTableViewManager:(EGORefreshTableViewManager*)manager reloadTableViewDataSource:(EGORefreshTableView*)EGORefreshView withType:(EGORefreshViewType)freshViewType
+{
+    [self refreshList:YES];
 }
 // ----------------------------------
 
@@ -173,8 +189,8 @@
     });
     
     if (!_withoutRefreshHeader) {
-        ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
-        [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+        _refreshManager = [[EGORefreshTableViewManager alloc] initWithEGORefreshViewType:EGORefreshViewHeader andTargetView:_tableView];
+        _refreshManager.delegate = self;
     }
     // 没有更多了
     if (_withoutLoadMore) {

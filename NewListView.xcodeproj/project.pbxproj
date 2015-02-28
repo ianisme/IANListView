@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3C031DAD1A9F24DB0089C66C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C031DAC1A9F24DB0089C66C /* Default-568h@2x.png */; };
-		3CDDE3971AA041FC002805B6 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDE3961AA041FC002805B6 /* ODRefreshControl.m */; };
+		3C4F0EF51AA1996E00F933E9 /* EGORefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F0EEB1AA1996E00F933E9 /* EGORefreshTableView.m */; };
+		3C4F0EF61AA1996E00F933E9 /* EGORefreshTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F0EED1AA1996E00F933E9 /* EGORefreshTableViewManager.m */; };
+		3C4F0EF71AA1996E00F933E9 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F0EEF1AA1996E00F933E9 /* blueArrow.png */; };
+		3C4F0EF81AA1996E00F933E9 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4F0EF01AA1996E00F933E9 /* blueArrow@2x.png */; };
 		3CDDE3DF1AA064CD002805B6 /* UUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDE3DE1AA064CD002805B6 /* UUtil.m */; };
 		3CE86BA61A9D620800859E71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE86BA51A9D620800859E71 /* main.m */; };
 		3CE86BA91A9D620800859E71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE86BA81A9D620800859E71 /* AppDelegate.m */; };
@@ -34,8 +37,12 @@
 /* Begin PBXFileReference section */
 		2F917632AB270B2CA0290F6A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C031DAC1A9F24DB0089C66C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		3CDDE3951AA041FC002805B6 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
-		3CDDE3961AA041FC002805B6 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
+		3C4F0EEA1AA1996E00F933E9 /* EGORefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableView.h; sourceTree = "<group>"; };
+		3C4F0EEB1AA1996E00F933E9 /* EGORefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableView.m; sourceTree = "<group>"; };
+		3C4F0EEC1AA1996E00F933E9 /* EGORefreshTableViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableViewManager.h; sourceTree = "<group>"; };
+		3C4F0EED1AA1996E00F933E9 /* EGORefreshTableViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableViewManager.m; sourceTree = "<group>"; };
+		3C4F0EEF1AA1996E00F933E9 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		3C4F0EF01AA1996E00F933E9 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
 		3CDDE3DD1AA064CD002805B6 /* UUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUtil.h; sourceTree = "<group>"; };
 		3CDDE3DE1AA064CD002805B6 /* UUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUtil.m; sourceTree = "<group>"; };
 		3CE86BA01A9D620800859E71 /* NewListView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewListView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,18 +96,30 @@
 		3C031DA71A9F1EF00089C66C /* NewListViewLib */ = {
 			isa = PBXGroup;
 			children = (
-				3C031DA81A9F1EFE0089C66C /* RefreshTableHeaderView */,
+				3C4F0EE91AA1996E00F933E9 /* EGORefreshTableViewManager */,
 			);
 			path = NewListViewLib;
 			sourceTree = "<group>";
 		};
-		3C031DA81A9F1EFE0089C66C /* RefreshTableHeaderView */ = {
+		3C4F0EE91AA1996E00F933E9 /* EGORefreshTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
-				3CDDE3951AA041FC002805B6 /* ODRefreshControl.h */,
-				3CDDE3961AA041FC002805B6 /* ODRefreshControl.m */,
+				3C4F0EEA1AA1996E00F933E9 /* EGORefreshTableView.h */,
+				3C4F0EEB1AA1996E00F933E9 /* EGORefreshTableView.m */,
+				3C4F0EEC1AA1996E00F933E9 /* EGORefreshTableViewManager.h */,
+				3C4F0EED1AA1996E00F933E9 /* EGORefreshTableViewManager.m */,
+				3C4F0EEE1AA1996E00F933E9 /* Images */,
 			);
-			path = RefreshTableHeaderView;
+			path = EGORefreshTableViewManager;
+			sourceTree = "<group>";
+		};
+		3C4F0EEE1AA1996E00F933E9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3C4F0EEF1AA1996E00F933E9 /* blueArrow.png */,
+				3C4F0EF01AA1996E00F933E9 /* blueArrow@2x.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		3CDDE3DC1AA0649A002805B6 /* Lib */ = {
@@ -281,7 +300,9 @@
 			files = (
 				3CE86BB41A9D620800859E71 /* LaunchScreen.xib in Resources */,
 				3CE86BB11A9D620800859E71 /* Images.xcassets in Resources */,
+				3C4F0EF81AA1996E00F933E9 /* blueArrow@2x.png in Resources */,
 				3C031DAD1A9F24DB0089C66C /* Default-568h@2x.png in Resources */,
+				3C4F0EF71AA1996E00F933E9 /* blueArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,12 +353,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C4F0EF61AA1996E00F933E9 /* EGORefreshTableViewManager.m in Sources */,
 				3CE86BA91A9D620800859E71 /* AppDelegate.m in Sources */,
 				3CE86BCF1A9D6A2900859E71 /* NewListView.m in Sources */,
 				3CE86BA61A9D620800859E71 /* main.m in Sources */,
 				3CE86BCB1A9D676A00859E71 /* RootViewController.m in Sources */,
 				3CDDE3DF1AA064CD002805B6 /* UUtil.m in Sources */,
-				3CDDE3971AA041FC002805B6 /* ODRefreshControl.m in Sources */,
+				3C4F0EF51AA1996E00F933E9 /* EGORefreshTableView.m in Sources */,
 				3CE86BD31A9D7BB200859E71 /* NewPagedDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
