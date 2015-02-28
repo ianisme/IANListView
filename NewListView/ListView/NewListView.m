@@ -25,7 +25,7 @@
 }
 - (void)viewDidAppearReloadData
 {
-    [_refreshManager pullRefresh];
+    [self.tableView headerBeginRefreshing];
 }
 
 - (void)refreshList:(BOOL)force
@@ -35,6 +35,7 @@
     }
     
     [_dataSource refresh:force handler:^(BOOL success, id result){
+        [self.tableView headerEndRefreshing];
         [self reloadData];
     }];
 }
@@ -116,27 +117,10 @@
     return [_dataSource tableView:tableView cellForRow:[indexPath row]];
 }
 //-----------------------------
-#pragma -mark refreshHeader
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (_refreshManager)
-    {
-        [_refreshManager egoRefreshManagerScrollViewDidScroll:scrollView];
-    }
-}
+#pragma mark MJRefresh Methods
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if (_refreshManager)
-    {
-        [_refreshManager egoRefreshManagerScrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-    }
-}
-
-#pragma mark EGORefreshTableHeaderDelegate Methods
-
-- (void)refreshTableViewManager:(EGORefreshTableViewManager*)manager reloadTableViewDataSource:(EGORefreshTableView*)EGORefreshView withType:(EGORefreshViewType)freshViewType
+- (void)headerRereshing
 {
     [self refreshList:YES];
 }
@@ -189,8 +173,7 @@
     });
     
     if (!_withoutRefreshHeader) {
-        _refreshManager = [[EGORefreshTableViewManager alloc] initWithEGORefreshViewType:EGORefreshViewHeader andTargetView:_tableView];
-        _refreshManager.delegate = self;
+        [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     }
     // 没有更多了
     if (_withoutLoadMore) {

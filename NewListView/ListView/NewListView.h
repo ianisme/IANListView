@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "NewPagedDataSource.h"
-#import "EGORefreshTableViewManager.h"
-@interface NewListView : UIView<UITableViewDataSource, UITableViewDelegate, EGORefreshTableViewManagerDelegate>
+#import "MJRefresh.h"
+@interface NewListView : UIView<UITableViewDataSource, UITableViewDelegate>
 {
 @private
     BOOL _isEmpty;
     BOOL _isFailing;
-    EGORefreshTableViewManager *_refreshManager;
 }
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, strong) id<NewListViewDataSource> dataSource;
