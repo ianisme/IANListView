@@ -76,7 +76,7 @@
         
     };
     _listView.dataSource = ds;
-    
+    [self.view addSubview:_listView];
     [_listView startLoading];
 }
 

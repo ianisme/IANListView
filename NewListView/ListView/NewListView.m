@@ -13,7 +13,7 @@
 - (void)startLoading
 {
     [self _initTabelView];
-    [self refreshList:NO];
+    [self refreshList:YES];
 }
 
 - (void)refreshList:(BOOL)force
