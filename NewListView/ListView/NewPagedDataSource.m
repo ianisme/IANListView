@@ -16,11 +16,10 @@
     return _dataArray.count;
 }
 
-- (void)refresh:(BOOL)force handler:(void (^)(BOOL success, id result))refreshDone
+- (void)refreshHandler:(void (^)(BOOL success, id result))refreshDone
 {
     _page = 1;
     NSMutableDictionary *params = [self _pageArgs];
-//    params[@"force_refresh"] = @(force);
     
     _requestBlock(params, ^(BOOL success, id result)
                         {
@@ -34,7 +33,7 @@
     );
 }
 
-- (void)loadMore:(void (^)(BOOL success, id result))loadMoreDone
+- (void)loadMoreHandler:(void (^)(BOOL success, id result))loadMoreDone
 {
     _page += 1;
     

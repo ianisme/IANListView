@@ -14,12 +14,12 @@
 
 @required
 - (NSInteger)numberOfRows;
-- (void)refresh:(BOOL)force handler:(void (^)(BOOL success, id result))refreshDone;
-- (void)loadMore:(void (^)(BOOL success, id result))loadMoreDone;
+- (CGFloat)heightOfRow:(NSInteger)row;
+- (void)refreshHandler:(void (^)(BOOL success, id result))refreshDone;
+- (void)loadMoreHandler:(void (^)(BOOL success, id result))loadMoreDone;
 - (BOOL)hasMore; //是否有更多
 - (void)clearData;
 - (void)tableView:(UITableView *)tableView didSelectRow:(NSInteger)row;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRow:(NSInteger)row;
-- (CGFloat)heightOfRow:(NSInteger)row;
 
 @end
