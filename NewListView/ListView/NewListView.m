@@ -13,7 +13,7 @@
 - (void)startLoading
 {
     [self _initTabelView];
-    [self refreshList:NO]; //默认为NO
+    [self refreshList:YES];
 }
 
 - (void)reloadData
@@ -23,23 +23,22 @@
         [_tableView reloadData];
     }
 }
-- (void)viewDidAppearReloadData
-{
-    if(!_withoutRefreshHeader){
-        [self.tableView headerBeginRefreshing];
-    }
-}
 
 - (void)refreshList:(BOOL)force
 {
-    if (!force) {
-        
+    // 为Yes的时候是执行自动下拉刷新
+    if (force) {
+        if(!_withoutRefreshHeader){
+            [self.tableView headerBeginRefreshing];
+        }
     }
 
     [_dataSource refresh:force handler:^(BOOL success, id result){
+
         if (!_withoutRefreshHeader) {
             [self.tableView headerEndRefreshing];
         }
+
         [self reloadData];
         
     }];
@@ -135,7 +134,7 @@
 
 - (void)headerRereshing
 {
-    [self refreshList:YES];
+    [self refreshList:NO];
 }
 // ----------------------------------
 

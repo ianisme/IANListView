@@ -23,8 +23,7 @@
 @property (nonatomic) BOOL withoutLoadMore; // 是否开启上拉加载更多
 
 - (void)startLoading;
-- (void)refreshList:(BOOL)force;
+- (void)refreshList:(BOOL)force; // force为Yes则实现自动的下拉刷新，为No的时候手动下拉刷新
 - (void)reloadData;
-- (void)viewDidAppearReloadData; //替代MHD刷新
 
 @end

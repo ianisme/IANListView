@@ -20,7 +20,7 @@
 {
     _page = 1;
     NSMutableDictionary *params = [self _pageArgs];
-    params[@"force_refresh"] = @(force);
+//    params[@"force_refresh"] = @(force);
     
     _requestBlock(params, ^(BOOL success, id result)
                         {
