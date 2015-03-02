@@ -30,6 +30,7 @@
     if (force) {
         if(!_withoutRefreshHeader){
             [self.tableView headerBeginRefreshing];
+            return;
         }
     }
 
