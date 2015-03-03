@@ -107,7 +107,9 @@
     }
 }
 
+
 #pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(_isFailing || _isEmpty){
@@ -164,6 +166,18 @@
         return [self _loadingMoreCellFor:tableView cellHeight:44 cellIdentifier:@"ListloadingCell"];
     }
     return [_dataSource tableView:tableView cellForRow:[indexPath row]];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (!_withoutLoadMore && [indexPath row] == [_dataSource numberOfRows])
+    {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
 }
 //-----------------------------
 

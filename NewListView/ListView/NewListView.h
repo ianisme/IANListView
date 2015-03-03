@@ -14,7 +14,6 @@
 @private
     BOOL _isEmpty;
     BOOL _isFailing;
-    BOOL _scrollEnabled;
 }
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, strong) id<NewListViewDataSource> dataSource;

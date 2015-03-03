@@ -10,10 +10,9 @@
 #import "NewListViewDataSource.h"
 
 typedef void(^TRequestBlock)(NSDictionary *, void(^)(BOOL successful, id result));
-typedef void (^TableViewSelectBlock)(NSInteger, id);
 typedef UITableViewCell * (^CreatTableViewCellBlock)(UITableView *, NSInteger, id);
 typedef CGFloat (^CalculateHeightOfRow)(NSInteger, id);
-
+typedef void (^TableViewSelectBlock)(NSInteger, id);
 @interface NewPagedDataSource : NSObject<NewListViewDataSource>
 {
 @private
@@ -27,5 +26,6 @@ typedef CGFloat (^CalculateHeightOfRow)(NSInteger, id);
 @property (nonatomic, copy) TableViewSelectBlock selectBlock;
 @property (nonatomic, copy) CreatTableViewCellBlock creatCellBlock;
 @property (nonatomic, copy) CalculateHeightOfRow calculateHeightofRowBlock;
+
 
 @end
