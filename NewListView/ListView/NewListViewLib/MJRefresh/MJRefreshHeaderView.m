@@ -198,11 +198,21 @@
                 
                 [UIView animateWithDuration:MJRefreshSlowAnimationDuration animations:^{
 //#warning 这句代码修复了，top值不断累加的bug
-                    if (self.scrollViewOriginalInset.top == 0) {
+//                    if (self.scrollViewOriginalInset.top == 0) {
+//                        self.scrollView.mj_contentInsetTop = 0;
+//                    } else if (self.scrollViewOriginalInset.top == self.scrollView.mj_contentInsetTop) {
+//                        self.scrollView.mj_contentInsetTop -= self.mj_height;
+//                    } else {
+//                        self.scrollView.mj_contentInsetTop = self.scrollViewOriginalInset.top;
+//                    }
+//#warning if判断修复了top值递减的bug 11月20 by-if_done
+                    if (self.scrollView.mj_contentInsetTop == 0) {
                         self.scrollView.mj_contentInsetTop = 0;
-                    } else if (self.scrollViewOriginalInset.top == self.scrollView.mj_contentInsetTop) {
+                    } else if (self.scrollViewOriginalInset.top == self.scrollView.mj_contentInsetTop || self.scrollView.mj_contentInsetTop >= MJRefreshViewHeight * 2)
+                    {
                         self.scrollView.mj_contentInsetTop -= self.mj_height;
-                    } else {
+                    }else
+                    {
                         self.scrollView.mj_contentInsetTop = self.scrollViewOriginalInset.top;
                     }
                 }];
