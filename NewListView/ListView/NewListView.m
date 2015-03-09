@@ -21,7 +21,7 @@
     // 为Yes的时候是执行自动下拉刷新
     if (force) {
         if(!_withoutRefreshHeader){
-            [self.tableView headerBeginRefreshing];
+            [self.tableView.header beginRefreshing];
             return;
         }
     }
@@ -36,7 +36,7 @@
         }
         
         if (!_withoutRefreshHeader) {
-            [self.tableView headerEndRefreshing];
+            [self.tableView.header endRefreshing];
         }
 
         [_tableView reloadData];
@@ -276,7 +276,28 @@
     });
     
     if (!_withoutRefreshHeader) {
-        [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+        [self.tableView addGifHeaderWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+        // 隐藏时间
+        self.tableView.header.updatedTimeHidden = YES;
+        // 隐藏状态
+        self.tableView.header.stateHidden = YES;
+        
+        // 设置普通状态的动画图片
+        NSMutableArray *idleImages = [NSMutableArray array];
+        for (NSUInteger i = 1; i<=60; i++) {
+            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dropdown_anim__000%zd", i]];
+            [idleImages addObject:image];
+        }
+        [self.tableView.gifHeader setImages:idleImages forState:MJRefreshHeaderStateIdle];
+        
+        // 设置正在刷新状态的动画图片
+        NSMutableArray *refreshingImages = [NSMutableArray array];
+        for (NSUInteger i = 1; i<=3; i++) {
+            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dropdown_loading_0%zd", i]];
+            [refreshingImages addObject:image];
+        }
+        [self.tableView.gifHeader setImages:refreshingImages forState:MJRefreshHeaderStateRefreshing];
+
     }
     // 没有更多了
     if (_withoutLoadMore) {
@@ -294,4 +315,6 @@
     [tableView setTableFooterView:view];
     [tableView setTableHeaderView:view];
 }
+
+
 @end
