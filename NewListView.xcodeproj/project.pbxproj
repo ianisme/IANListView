@@ -20,7 +20,6 @@
 		3C92A0361AAD5CE300C81FC3 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92A0281AAD5CE300C81FC3 /* UIScrollView+MJExtension.m */; };
 		3C92A0371AAD5CE300C81FC3 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92A02A1AAD5CE300C81FC3 /* UIScrollView+MJRefresh.m */; };
 		3C92A0381AAD5CE300C81FC3 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C92A02C1AAD5CE300C81FC3 /* UIView+MJExtension.m */; };
-		3C92A03C1AAD610D00C81FC3 /* refresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C92A03B1AAD610D00C81FC3 /* refresh.bundle */; };
 		3CDDE3DF1AA064CD002805B6 /* UUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDE3DE1AA064CD002805B6 /* UUtil.m */; };
 		3CE86BA61A9D620800859E71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE86BA51A9D620800859E71 /* main.m */; };
 		3CE86BA91A9D620800859E71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE86BA81A9D620800859E71 /* AppDelegate.m */; };
@@ -70,7 +69,6 @@
 		3C92A02A1AAD5CE300C81FC3 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		3C92A02B1AAD5CE300C81FC3 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		3C92A02C1AAD5CE300C81FC3 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
-		3C92A03B1AAD610D00C81FC3 /* refresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = refresh.bundle; sourceTree = "<group>"; };
 		3CDDE3DD1AA064CD002805B6 /* UUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUtil.h; sourceTree = "<group>"; };
 		3CDDE3DE1AA064CD002805B6 /* UUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUtil.m; sourceTree = "<group>"; };
 		3CE86BA01A9D620800859E71 /* NewListView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewListView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,7 +195,6 @@
 				3CE86BA81A9D620800859E71 /* AppDelegate.m */,
 				3CE86BC91A9D676A00859E71 /* RootViewController.h */,
 				3CE86BCA1A9D676A00859E71 /* RootViewController.m */,
-				3C92A03B1AAD610D00C81FC3 /* refresh.bundle */,
 				3CDDE3DC1AA0649A002805B6 /* Lib */,
 				3CE86BCC1A9D6A0600859E71 /* ListView */,
 				3CE86BB01A9D620800859E71 /* Images.xcassets */,
@@ -340,7 +337,6 @@
 				3CE86BB41A9D620800859E71 /* LaunchScreen.xib in Resources */,
 				3CE86BB11A9D620800859E71 /* Images.xcassets in Resources */,
 				3C92A02D1AAD5CE300C81FC3 /* MJRefresh.bundle in Resources */,
-				3C92A03C1AAD610D00C81FC3 /* refresh.bundle in Resources */,
 				3C031DAD1A9F24DB0089C66C /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
