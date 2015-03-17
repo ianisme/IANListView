@@ -316,5 +316,11 @@
     [tableView setTableHeaderView:view];
 }
 
+- (void)dealloc
+{
+    _tableView.delegate = nil;
+    _tableView.dataSource = nil;
+}
+
 
 @end
