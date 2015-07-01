@@ -1,5 +1,5 @@
 <h2> NewListView</h2>
-<h4>说明： NewListView将UITableView的方法全部提供了外部接口，并提供NewPagedDataSource.h以进行扩展自定义。</h4>
+<h4>说明: NewListView将UITableView的方法全部提供了外部接口，并提供NewPagedDataSource.h以进行扩展自定义。</h4>
 - NewListView.h  
 ```Objective-C
   @property (nonatomic, copy)NSString *emptyText; //数据为空时显示的文字  
