@@ -18,6 +18,8 @@
 
 @implementation RootViewController
 
+#pragma mark - life style
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"NewListView";
@@ -62,10 +64,10 @@
     
     ds.calculateHeightofRowBlock = ^(NSInteger row, NSMutableArray *dataArray){
 
-//        if (row < [dataArray count]) {
-//            CGSize size = [UUtil textSize:((NSDictionary *)dataArray[row])[@"content"] font:[UIFont systemFontOfSize:14.0f] bounding:CGSizeMake(self.view.bounds.size.width-30, INT32_MAX)];
-//            return size.height+10;
-//        }
+        if (row < [dataArray count]) {
+            CGSize size = [self textSize:((NSDictionary *)dataArray[row])[@"content"] font:[UIFont systemFontOfSize:14.0f] bounding:CGSizeMake(self.view.bounds.size.width-30, INT32_MAX)];
+            return size.height+10;
+        }
         return (CGFloat)44.0;
     };
 
@@ -86,14 +88,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - private method
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (CGSize)textSize:(NSString *)text font:(UIFont *)font bounding:(CGSize)size
+{
+    if (!(text && font) || [text isEqual:[NSNull null]]) {
+        return CGSizeZero;
+    }
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_0) {
+        CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
+        return CGRectIntegral(rect).size;
+    } else {
+        return [text sizeWithFont:font constrainedToSize:size];
+    }
+    return size;
 }
-*/
-
 @end

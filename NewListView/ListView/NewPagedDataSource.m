@@ -48,6 +48,20 @@
 
 }
 
+- (void)tableViewDataSourceAndDelegate:(UITableView *)tableView andWithoutLoadMore:(BOOL)withoutLoadMore;
+{
+    _withoutLoadMore = withoutLoadMore;
+    tableView.delegate = self;
+    tableView.dataSource = self;
+}
+
+- (void)clearData
+{
+    _dataArray = nil;
+    _hasMore = NO;
+}
+
+
 #pragma mark - NewListViewDataSource protocol-
 - (NSInteger)numberOfRows
 {
@@ -72,13 +86,6 @@
                   );
 }
 
-- (void)clearData
-{
-    _dataArray = nil;
-    _hasMore = NO;
-}
-
-
 - (NSMutableDictionary *)_pageArgs
 {
     NSMutableDictionary *args = [[NSMutableDictionary alloc] init];
@@ -87,12 +94,6 @@
     return args;
 }
 
-- (void)tableViewDataSourceAndDelegate:(UITableView *)tableView andWithoutLoadMore:(BOOL)withoutLoadMore;
-{
-    _withoutLoadMore = withoutLoadMore;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-}
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,7 +101,7 @@
     if (_isEmpty || _isFailing) {
         return tableView.frame.size.height;
     }
-    
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     if (self.calculateHeightofRowBlock) {
         return self.calculateHeightofRowBlock(indexPath.row, self.dataArray);
     }
@@ -311,15 +312,9 @@
     if (!(text && font) || [text isEqual:[NSNull null]]) {
         return CGSizeZero;
     }
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_0) {
-        CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
+    CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
         return CGRectIntegral(rect).size;
-    } else {
-        return [text sizeWithFont:font constrainedToSize:size];
-    }
     return size;
 }
-
-// ----------------------------------
 
 @end
