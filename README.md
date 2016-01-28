@@ -1,12 +1,12 @@
 # IANListView
 
 ### 说明：
-- 简单实现一个炫酷的个人中心界面
+- 对UITableview的一个封装
 
 ### 功能如下：
 
 - 1.集成下拉刷新（项目中有MJRefresh的童鞋，请自行删除）
-- 2.分页参数集成到datasouce中
+- 2.分页参数集成到datasource中
 - 3.对数据为空做了有效处理
 
 ### 代码示例：
@@ -16,7 +16,7 @@
  	_listView = [[IANListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
     
     IANPageDataSource *ds = [[IANPageDataSource alloc] init];
-    ds.pageSize = 20;
+    ds.pageSize = 20; // 每页的数量
     ds.requestBlock = ^(NSDictionary *params, void(^dataArrayDone)(BOOL, id)){
         
        		// 网络请求
