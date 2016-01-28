@@ -9,15 +9,12 @@
 #import "IANPageDataSource.h"
 
 @interface IANPageDataSource()
-{
-@private
-    BOOL _hasMore;
-    BOOL _isEmpty;
-    BOOL _isFailing;
-    BOOL _withoutLoadMore;
-}
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic) BOOL hasMore;
+@property (nonatomic) BOOL isEmpty;
+@property (nonatomic) BOOL isFailing;
+@property (nonatomic) BOOL withoutLoadMore;
 
 @end
 
@@ -313,8 +310,12 @@
     if (!(text && font) || [text isEqual:[NSNull null]]) {
         return CGSizeZero;
     }
-    CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
-    return CGRectIntegral(rect).size;
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_0) {
+        CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
+        return CGRectIntegral(rect).size;
+    } else {
+        return [text sizeWithFont:font constrainedToSize:size];
+    }
     return size;
 }
 

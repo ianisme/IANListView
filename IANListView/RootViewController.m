@@ -11,9 +11,9 @@
 #import "AFNetworking.h"
 
 @interface RootViewController ()
-{
-    IANListView *_listView;
-}
+
+@property (nonatomic, strong) IANListView *listView;
+
 @end
 
 @implementation RootViewController
@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"IANListView";
-    self.edgesForExtendedLayout=UIRectEdgeNone;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     _listView = [[IANListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
     
     IANPageDataSource *ds = [[IANPageDataSource alloc] init];
