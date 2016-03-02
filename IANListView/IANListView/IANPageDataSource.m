@@ -99,7 +99,6 @@
     if (_isEmpty || _isFailing) {
         return tableView.frame.size.height;
     }
-    //    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     if (self.calculateHeightofRowBlock) {
         return self.calculateHeightofRowBlock(indexPath.row, self.dataArray);
     }
@@ -203,7 +202,7 @@
             if (self.failureView) {
                 [failureCell.contentView addSubview:self.failureView];
             }else{
-                [failureCell.contentView addSubview:[self _failureView]];
+                [failureCell.contentView addSubview:self.failureView];
             }
         }
         

@@ -23,14 +23,14 @@
     // 为Yes的时候是执行自动下拉刷新
     if (force) {
         if(!_withoutRefreshHeader){
-            [self.tableView.header beginRefreshing];
+            [self.tableView.mj_header beginRefreshing];
             return;
         }
     }
     
     [_dataSource refreshDataHandler:^{
         if (!_withoutRefreshHeader) {
-            [self.tableView.header endRefreshing];
+            [self.tableView.mj_header endRefreshing];
         }
         
         [_tableView reloadData];
@@ -61,11 +61,13 @@
     });
     
     if (!_withoutRefreshHeader) {
-        [self.tableView addGifHeaderWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+        MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+
         // 隐藏时间
-        self.tableView.header.updatedTimeHidden = YES;
+        header.lastUpdatedTimeLabel.hidden = YES;
+        
         // 隐藏状态
-        self.tableView.header.stateHidden = YES;
+        header.stateLabel.hidden = YES;
         
         // 设置普通状态的动画图片
         NSMutableArray *idleImages = [NSMutableArray array];
@@ -73,7 +75,7 @@
             UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dropdown_anim__000%zd", i]];
             [idleImages addObject:image];
         }
-        [self.tableView.gifHeader setImages:idleImages forState:MJRefreshHeaderStateIdle];
+        [header setImages:idleImages forState:MJRefreshStateIdle];
         
         // 设置正在刷新状态的动画图片
         NSMutableArray *refreshingImages = [NSMutableArray array];
@@ -81,8 +83,8 @@
             UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dropdown_loading_0%zd", i]];
             [refreshingImages addObject:image];
         }
-        [self.tableView.gifHeader setImages:refreshingImages forState:MJRefreshHeaderStateRefreshing];
-        
+        [header setImages:refreshingImages forState:MJRefreshStateRefreshing];
+        self.tableView.mj_header = header;
     }
     // 没有更多了
     if (_withoutLoadMore) {

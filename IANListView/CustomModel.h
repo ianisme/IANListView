@@ -7,14 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JSONModel/JSONModel.h>
 
-@interface CustomModel : NSObject
+typedef NS_ENUM(NSUInteger, ContentType) {
+    ImageContentType = 0,
+    NoImageContentType
+};
 
-@property (nonatomic, copy) NSString *itemId;
+@interface CustomModel : JSONModel
+
+@property (nonatomic, assign) ContentType contentType;
+@property (nonatomic, strong) NSNumber *itemId;
 @property (nonatomic, copy) NSString *content;
-@property (nonatomic, copy) NSString *format;
-@property (nonatomic, copy) NSString *imageStr;
-@property (nonatomic, assign) NSUInteger sizeWith;
-@property (nonatomic, assign) NSUInteger sizeHeight;
-
+@property (nonatomic, assign) NSNumber *imgSizeWidth;
+@property (nonatomic, assign) NSNumber *imgSizeHeight;
 @end

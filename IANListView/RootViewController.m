@@ -40,13 +40,12 @@
             NSString *html = operation.responseString;
             NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
             id dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
-            //NSLog(@"获取到的数据为：%@",dict);
             
             NSMutableArray *tempArray = [NSMutableArray arrayWithArray:dict[@"items"]];
             
-            dataArrayDone(1,tempArray);
+            dataArrayDone(YES,tempArray);
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            dataArrayDone(0,error);
+            dataArrayDone(NO,error);
         }];
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [queue addOperation:operation];
@@ -58,16 +57,7 @@
         if (!cell) {
             cell = [[IANCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-        CustomModel *model = [[CustomModel alloc] init];
-        model.itemId = [NSString stringWithFormat:@"%@",dataArray[row][@"id"]];
-        model.content = dataArray[row][@"content"];
-        model.format = dataArray[row][@"format"];
-        if ([model.format isEqualToString:@"image"]) {
-//            model.sizeWith = (NSUInteger)[dataArray[row][@"image_size"][@"s"] firstObject];
-//            model.sizeHeight = (NSUInteger)[dataArray[row][@"image_size"][@"s"] objectAtIndex:1];
-            model.sizeWith = 200;
-            model.sizeHeight = 200;
-        }
+        CustomModel *model = [[CustomModel alloc] initWithDictionary:dataArray[row] error:nil];
         cell.model = model;
        
         return cell;
@@ -76,12 +66,11 @@
     ds.calculateHeightofRowBlock = ^(NSInteger row, NSMutableArray *dataArray){
         
         if (row < [dataArray count]) {
-            
-        CGSize size = [self textSize:dataArray[row][@"content"] font:[UIFont systemFontOfSize:12.0f] bounding:CGSizeMake(self.view.bounds.size.width-30, INT32_MAX)];
-            if ([dataArray[row][@"format"] isEqualToString:@"image"]) {
-                return size.height + 200 + 45;
+            CustomModel *model = [[CustomModel alloc] initWithDictionary:dataArray[row] error:nil];
+        CGSize size = [self textSize:model.content font:[UIFont systemFontOfSize:12.0f] bounding:CGSizeMake(self.view.bounds.size.width - 30, INT32_MAX)];
+            if (model.contentType == ImageContentType) {
+                return size.height + model.imgSizeHeight.integerValue + 45;
             } else {
-            
                 return size.height + 30;
             }
 

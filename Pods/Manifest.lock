@@ -20,11 +20,17 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - JSONModel (1.2.0)
+  - MJRefresh (3.1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.1)
+  - JSONModel (~> 1.2.0)
+  - MJRefresh (~> 3.1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
 
 COCOAPODS: 0.39.0

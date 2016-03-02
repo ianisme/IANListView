@@ -5,7 +5,7 @@
 
 ### 功能如下：
 
-- 1.集成下拉刷新（项目中有MJRefresh的童鞋，请自行删除）
+- 1.此封装需要pod集成MJRefresh和JSONModel，可以自行修改代码
 - 2.分页参数集成到datasource中
 - 3.对数据为空做了有效处理
 

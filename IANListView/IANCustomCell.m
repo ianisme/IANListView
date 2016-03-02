@@ -48,12 +48,10 @@
     if (!(text && font) || [text isEqual:[NSNull null]]) {
         return CGSizeZero;
     }
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_0) {
-        CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
+
+    CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
         return CGRectIntegral(rect).size;
-    } else {
-        return [text sizeWithFont:font constrainedToSize:size];
-    }
+
     return size;
 }
 
@@ -66,9 +64,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if ([self.model.format isEqualToString:@"image"]) {
-        _imageView.frame = CGRectMake(15, 15, self.model.sizeWith, self.model.sizeHeight);
-        _imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self getImageURLStr:self.model.itemId]]]];
+    if (self.model.contentType == ImageContentType) {
+        _imageView.frame = CGRectMake(15, 15, self.model.imgSizeWidth.integerValue, self.model.imgSizeHeight.integerValue);
+        _imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self getImageURLStr:[NSString stringWithFormat:@"%zd",self.model.itemId.integerValue]]]]];
     } else {
         _imageView.frame = CGRectZero;
     }
@@ -78,7 +76,5 @@
     _contentLabel.frame = CGRectMake(15, _imageView.frame.origin.y + _imageView.frame.size.height + 15, self.frame.size.width - 30, size.height);
     
     _contentLabel.text = self.model.content;
-    
-    
 }
 @end
