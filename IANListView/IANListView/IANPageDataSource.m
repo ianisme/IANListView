@@ -202,7 +202,7 @@
             if (self.failureView) {
                 [failureCell.contentView addSubview:self.failureView];
             }else{
-                [failureCell.contentView addSubview:self.failureView];
+                [failureCell.contentView addSubview:[self _failureView]];
             }
         }
         
