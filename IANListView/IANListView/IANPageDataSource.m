@@ -309,13 +309,8 @@
     if (!(text && font) || [text isEqual:[NSNull null]]) {
         return CGSizeZero;
     }
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_0) {
-        CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
+    CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
         return CGRectIntegral(rect).size;
-    } else {
-        return [text sizeWithFont:font constrainedToSize:size];
-    }
-    return size;
 }
 
 

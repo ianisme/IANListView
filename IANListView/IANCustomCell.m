@@ -66,7 +66,15 @@
     [super layoutSubviews];
     if (self.model.contentType == ImageContentType) {
         _imageView.frame = CGRectMake(15, 15, self.model.imgSizeWidth.integerValue, self.model.imgSizeHeight.integerValue);
-        _imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self getImageURLStr:[NSString stringWithFormat:@"%zd",self.model.itemId.integerValue]]]]];
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self getImageURLStr:[NSString stringWithFormat:@"%zd",self.model.itemId.integerValue]]]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _imageView.image = image;
+            });
+        });
+
     } else {
         _imageView.frame = CGRectZero;
     }
@@ -77,4 +85,5 @@
     
     _contentLabel.text = self.model.content;
 }
+
 @end
