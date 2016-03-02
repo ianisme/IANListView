@@ -28,6 +28,8 @@
 		3C80253A1C43F90F00350DFD /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C80252C1C43F90F00350DFD /* UIScrollView+MJExtension.m */; };
 		3C80253B1C43F90F00350DFD /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C80252E1C43F90F00350DFD /* UIScrollView+MJRefresh.m */; };
 		3C80253C1C43F90F00350DFD /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8025301C43F90F00350DFD /* UIView+MJExtension.m */; };
+		3CF0C81C1C85E7CF002D83E6 /* IANCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0C81B1C85E7CF002D83E6 /* IANCustomCell.m */; };
+		3CF0C81F1C85E8A2002D83E6 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0C81E1C85E8A2002D83E6 /* CustomModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,10 @@
 		3C80252E1C43F90F00350DFD /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		3C80252F1C43F90F00350DFD /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		3C8025301C43F90F00350DFD /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		3CF0C81A1C85E7CF002D83E6 /* IANCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IANCustomCell.h; sourceTree = "<group>"; };
+		3CF0C81B1C85E7CF002D83E6 /* IANCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IANCustomCell.m; sourceTree = "<group>"; };
+		3CF0C81D1C85E8A2002D83E6 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomModel.h; sourceTree = "<group>"; };
+		3CF0C81E1C85E8A2002D83E6 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomModel.m; sourceTree = "<group>"; };
 		4F78E058125DC4B55416A523 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C9BECD79AA60F9541D84CEAB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -119,6 +125,10 @@
 				3C8024FA1C43EFF500350DFD /* AppDelegate.m */,
 				3C80250D1C43F82100350DFD /* RootViewController.h */,
 				3C80250E1C43F82100350DFD /* RootViewController.m */,
+				3CF0C81A1C85E7CF002D83E6 /* IANCustomCell.h */,
+				3CF0C81B1C85E7CF002D83E6 /* IANCustomCell.m */,
+				3CF0C81D1C85E8A2002D83E6 /* CustomModel.h */,
+				3CF0C81E1C85E8A2002D83E6 /* CustomModel.m */,
 				3C8025101C43F86E00350DFD /* IANListView */,
 				3C8024FF1C43EFF500350DFD /* Main.storyboard */,
 				3C8025021C43EFF500350DFD /* Assets.xcassets */,
@@ -333,7 +343,9 @@
 				3C80250F1C43F82100350DFD /* RootViewController.m in Sources */,
 				3C8025361C43F90F00350DFD /* MJRefreshGifHeader.m in Sources */,
 				3C8025131C43F89400350DFD /* IANListView.m in Sources */,
+				3CF0C81F1C85E8A2002D83E6 /* CustomModel.m in Sources */,
 				3C8025381C43F90F00350DFD /* MJRefreshLegendFooter.m in Sources */,
+				3CF0C81C1C85E7CF002D83E6 /* IANCustomCell.m in Sources */,
 				3C8025371C43F90F00350DFD /* MJRefreshHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

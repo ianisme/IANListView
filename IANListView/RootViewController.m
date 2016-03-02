@@ -9,6 +9,8 @@
 #import "RootViewController.h"
 #import "IANListView.h"
 #import "AFNetworking.h"
+#import "IANCustomCell.h"
+#import "CustomModel.h"
 
 @interface RootViewController ()
 
@@ -52,21 +54,37 @@
     };
     ds.creatCellBlock = ^(UITableView *tableView, NSInteger row, NSMutableArray *dataArray){
         NSString *cellIdentifier = @"cellIdentifier";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        IANCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            cell = [[IANCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
-        cell.textLabel.text = ((NSDictionary *)dataArray[row])[@"content"];
+        CustomModel *model = [[CustomModel alloc] init];
+        model.itemId = [NSString stringWithFormat:@"%@",dataArray[row][@"id"]];
+        model.content = dataArray[row][@"content"];
+        model.format = dataArray[row][@"format"];
+        if ([model.format isEqualToString:@"image"]) {
+//            model.sizeWith = (NSUInteger)[dataArray[row][@"image_size"][@"s"] firstObject];
+//            model.sizeHeight = (NSUInteger)[dataArray[row][@"image_size"][@"s"] objectAtIndex:1];
+            model.sizeWith = 200;
+            model.sizeHeight = 200;
+        }
+        cell.model = model;
+       
         return cell;
     };
     
     ds.calculateHeightofRowBlock = ^(NSInteger row, NSMutableArray *dataArray){
         
         if (row < [dataArray count]) {
-            CGSize size = [self textSize:((NSDictionary *)dataArray[row])[@"content"] font:[UIFont systemFontOfSize:14.0f] bounding:CGSizeMake(self.view.bounds.size.width-30, INT32_MAX)];
-            return size.height+10;
+            
+        CGSize size = [self textSize:dataArray[row][@"content"] font:[UIFont systemFontOfSize:12.0f] bounding:CGSizeMake(self.view.bounds.size.width-30, INT32_MAX)];
+            if ([dataArray[row][@"format"] isEqualToString:@"image"]) {
+                return size.height + 200 + 45;
+            } else {
+            
+                return size.height + 30;
+            }
+
         }
         return (CGFloat)44.0;
     };
@@ -87,8 +105,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - private method
 
 - (CGSize)textSize:(NSString *)text font:(UIFont *)font bounding:(CGSize)size
 {
