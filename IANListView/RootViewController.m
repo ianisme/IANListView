@@ -27,7 +27,8 @@
     self.title = @"IANListView";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     _listView = [[IANListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
-    
+    _listView.cellIdentifier = @"cellIdentifier";
+    _listView.cellClass = NSStringFromClass([IANCustomCell class]);
     IANPageDataSource *ds = [[IANPageDataSource alloc] init];
     ds.pageSize = 20;
     ds.requestBlock = ^(NSDictionary *params, void(^dataArrayDone)(BOOL, id)){
@@ -51,36 +52,29 @@
         [queue addOperation:operation];
         
     };
-    ds.creatCellBlock = ^(UITableView *tableView, NSInteger row, NSMutableArray *dataArray){
+    ds.creatCellBlock = ^(UITableView *tableView, NSIndexPath *indexPath, NSMutableArray *dataArray){
         NSString *cellIdentifier = @"cellIdentifier";
-        IANCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (!cell) {
-            cell = [[IANCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        }
-        CustomModel *model = [[CustomModel alloc] initWithDictionary:dataArray[row] error:nil];
-        cell.model = model;
+        IANCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        CustomModel *model = [[CustomModel alloc] initWithDictionary:dataArray[indexPath.row] error:nil];
+        [cell configCellWithModel:model];
        
         return cell;
     };
     
-    ds.calculateHeightofRowBlock = ^(NSInteger row, NSMutableArray *dataArray){
+    ds.calculateHeightofRowBlock = ^(NSIndexPath *indexPath, NSMutableArray *dataArray){
         
-        if (row < [dataArray count]) {
-            CustomModel *model = [[CustomModel alloc] initWithDictionary:dataArray[row] error:nil];
-        CGSize size = [self textSize:model.content font:[UIFont systemFontOfSize:12.0f] bounding:CGSizeMake(self.view.bounds.size.width - 30, INT32_MAX)];
-            if (model.contentType == ImageContentType) {
-                return size.height + model.imgSizeHeight.integerValue + 45;
-            } else {
-                return size.height + 30;
-            }
+        if (indexPath.row < [dataArray count]) {
+            CustomModel *model = [[CustomModel alloc] initWithDictionary:dataArray[indexPath.row] error:nil];
+            NSLog(@"测试：%f",[IANCustomCell heightWithModel:model]);
+            return [IANCustomCell heightWithModel:model];
 
         }
         return (CGFloat)44.0;
     };
     
-    ds.selectBlock = ^(NSInteger row, NSMutableArray *dataArray){
+    ds.selectBlock = ^(NSIndexPath *indexPath, NSMutableArray *dataArray){
         
-        NSLog(@"点击了第%ld行", (long)row);
+        NSLog(@"点击了第%ld行", (long)indexPath.row);
         
     };
     

@@ -11,6 +11,8 @@
 
 @interface IANCustomCell : UITableViewCell
 
-@property (nonatomic, strong) CustomModel *model;
+- (void)configCellWithModel:(CustomModel *)model;
+
++ (CGFloat)heightWithModel:(CustomModel *)model;
 
 @end

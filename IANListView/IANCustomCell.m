@@ -7,6 +7,7 @@
 //
 
 #import "IANCustomCell.h"
+#import <Masonry/Masonry.h>
 
 @implementation IANCustomCell
 {
@@ -14,25 +15,54 @@
     UIImageView *_imageView;
 }
 
+
+#pragma mark - lift style
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self initMyView];
+        [self creatView];
+        [self creatConstraint];
     }
     return self;
 }
 
-- (void)initMyView
+- (void)prepareForReuse
 {
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [super prepareForReuse];
+    _imageView.image = nil;
+}
+
+#pragma mark - private method
+
+- (void)creatView
+{
+    _imageView = [[UIImageView alloc] init];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_imageView];
     
-    _contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - 30;
+    _contentLabel = [[UILabel alloc] init];
     _contentLabel.numberOfLines = 0;
     _contentLabel.font = [UIFont systemFontOfSize:12.0f];
+    _contentLabel.preferredMaxLayoutWidth = preferredWidth;
     [self.contentView addSubview:_contentLabel];
+}
+
+- (void)creatConstraint
+{
+    [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).with.offset(15.0f);
+    }];
+    
+    [_contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_imageView.mas_bottom).with.offset(7.0f);
+        make.left.equalTo(_imageView);
+        make.right.equalTo(self.contentView).with.offset(-15.0f);
+    }];
+    
+    [_contentLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
 }
 
 - (NSString *)getImageURLStr:(NSString *)itemId
@@ -42,48 +72,45 @@
     return result;
 }
 
-
-- (CGSize)textSize:(NSString *)text font:(UIFont *)font bounding:(CGSize)size
+- (void)configCellWithModel:(CustomModel *)model
 {
-    if (!(text && font) || [text isEqual:[NSNull null]]) {
-        return CGSizeZero;
-    }
-
-    CGRect rect = [text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:font} context:nil];
-        return CGRectIntegral(rect).size;
-
-    return size;
-}
-
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    _imageView.image = nil;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    if (self.model.contentType == ImageContentType) {
-        _imageView.frame = CGRectMake(15, 15, self.model.imgSizeWidth.integerValue, self.model.imgSizeHeight.integerValue);
-        
+    if (model.contentType == ImageContentType) {
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         dispatch_async(queue, ^{
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self getImageURLStr:[NSString stringWithFormat:@"%zd",self.model.itemId.integerValue]]]]];
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self getImageURLStr:[NSString stringWithFormat:@"%zd",model.itemId.integerValue]]]]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 _imageView.image = image;
             });
         });
-
+        
+        [_imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView).with.offset(7.0f);
+            make.width.equalTo(@(model.imgSizeWidth.integerValue));
+            make.height.equalTo(@(model.imgSizeHeight.integerValue));
+        }];
+        
     } else {
-        _imageView.frame = CGRectZero;
+        [_imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView);
+            make.width.equalTo(@0);
+            make.height.equalTo(@0);
+        }];
     }
     
-    CGSize size = [self textSize:self.model.content font:[UIFont systemFontOfSize:12.0f] bounding:CGSizeMake(self.bounds.size.width-30, INT32_MAX)];
+    _contentLabel.text = model.content;
     
-    _contentLabel.frame = CGRectMake(15, _imageView.frame.origin.y + _imageView.frame.size.height + 15, self.frame.size.width - 30, size.height);
+
+}
+
++ (CGFloat)heightWithModel:(CustomModel *)model
+{
+    IANCustomCell *cell = [[IANCustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+    [cell configCellWithModel:model];
     
-    _contentLabel.text = self.model.content;
+    [cell layoutIfNeeded];
+    
+    CGRect frame = cell->_contentLabel.frame;
+    return frame.origin.y + frame.size.height + 7.0f;
 }
 
 @end

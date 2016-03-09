@@ -7,6 +7,7 @@
 //
 
 #import "IANListView.h"
+#import "IANCustomCell.h"
 
 @implementation IANListView
 
@@ -56,6 +57,11 @@
     _tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
         [self _setExtraCellLineHidden:tableView];
+        if (_cellIdentifier) {
+            const char *classChar =[_cellClass UTF8String];
+            [tableView registerClass:objc_getClass(classChar) forCellReuseIdentifier:_cellIdentifier];
+        }
+        
         [self addSubview:tableView];
         tableView;
     });

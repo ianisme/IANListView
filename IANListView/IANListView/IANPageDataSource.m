@@ -43,7 +43,6 @@
                       refreshDone();
                   }
                   );
-    
 }
 
 - (void)tableViewDataSourceAndDelegate:(UITableView *)tableView andWithoutLoadMore:(BOOL)withoutLoadMore;
@@ -100,7 +99,7 @@
         return tableView.frame.size.height;
     }
     if (self.calculateHeightofRowBlock) {
-        return self.calculateHeightofRowBlock(indexPath.row, self.dataArray);
+        return self.calculateHeightofRowBlock(indexPath, self.dataArray);
     }
     
     return 44;
@@ -110,7 +109,7 @@
 {
     if ([indexPath row] < [self numberOfRows]) {
         if (self.selectBlock) {
-            self.selectBlock(indexPath.row, self.dataArray);
+            self.selectBlock(indexPath, self.dataArray);
         }
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
@@ -215,7 +214,7 @@
     }
     
     if (self.creatCellBlock) {
-        return self.creatCellBlock(tableView, indexPath.row, self.dataArray);
+        return self.creatCellBlock(tableView, indexPath, self.dataArray);
     }else{
         return [[UITableViewCell alloc]init];
     }

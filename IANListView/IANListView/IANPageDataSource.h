@@ -10,9 +10,9 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^TRequestBlock)(NSDictionary *, void(^)(BOOL successful, id result));
-typedef UITableViewCell * (^CreatTableViewCellBlock)(UITableView *, NSInteger, id);
-typedef CGFloat (^CalculateHeightOfRow)(NSInteger, id);
-typedef void (^TableViewSelectBlock)(NSInteger, id);
+typedef UITableViewCell * (^CreatTableViewCellBlock)(UITableView *, NSIndexPath *, id);
+typedef CGFloat (^CalculateHeightOfRow)(NSIndexPath *, id);
+typedef void (^TableViewSelectBlock)(NSIndexPath *, id);
 
 @interface IANPageDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>
 

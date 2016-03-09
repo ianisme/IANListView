@@ -12,6 +12,8 @@
 
 @interface IANListView : UIView
 
+@property (nonatomic, copy) NSString *cellIdentifier;
+@property (nonatomic, copy) NSString *cellClass;
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, strong) IANPageDataSource *dataSource;
 
