@@ -51,4 +51,4 @@
 
 ### 效果演示（糗事百科数据演示）：
 
-<img src="http://785j3g.com1.z0.glb.clouddn.com/github%2Fianlistview%2Fdemo.gif"  alt="效果展示by ian" height="568" width="320" />
+<img src="https://github.com/ianisme/IANListView/blob/master/demo.gif"  alt="效果展示by ian" height="568" width="320" />
