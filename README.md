@@ -14,7 +14,8 @@
 ```
 
  	_listView = [[IANListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
-    
+    _listView.cellIdentifier = @"cellIdentifier";
+    _listView.cellClass = NSStringFromClass([IANCustomCell class]);
     IANPageDataSource *ds = [[IANPageDataSource alloc] init];
     ds.pageSize = 20; // 每页的数量
     ds.requestBlock = ^(NSDictionary *params, void(^dataArrayDone)(BOOL, id)){
@@ -26,7 +27,7 @@
   
     };
     ds.creatCellBlock = ^(UITableView *tableView, NSInteger row, NSMutableArray *dataArray){
-       	// 这是就是创建cell的地方
+       	// 这是就是创建cell的地方(摆脱别用判断cell为空的方法了)
         return cell;
     };
     
